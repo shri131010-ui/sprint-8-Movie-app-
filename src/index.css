@@ -11,7 +11,8 @@
 
 body {
   background: #111;
-  color: white;
+  color: #fff;
+  min-height: 100vh;
 }
 
 a {
@@ -19,45 +20,46 @@ a {
   color: inherit;
 }
 
-
 /* =========================
    NAVBAR
 ========================= */
 
 .navbar {
-  width: 100%;
-  height: 70px;
-  background: #000;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 50px;
+  align-items: center;
+  padding: 18px 50px;
+  background: linear-gradient(to bottom, #000, #141414);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
-.logo {
+.logo,
+.navbar h2 {
   color: #e50914;
   font-size: 32px;
   font-weight: bold;
+  letter-spacing: 1px;
 }
 
-.nav-links {
+.nav-links,
+.navbar div {
   display: flex;
   gap: 25px;
 }
 
-.nav-links a {
+.nav-links a,
+.navbar a {
   color: white;
-  font-size: 17px;
+  font-size: 16px;
   transition: 0.3s;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.navbar a:hover {
   color: #e50914;
 }
-
 
 /* =========================
    SEARCH BAR
@@ -66,12 +68,13 @@ a {
 .search-container {
   display: flex;
   justify-content: center;
-  margin: 30px 0;
+  margin: 35px 0;
 }
 
 .search-container input {
-  width: 50%;
-  padding: 15px 20px;
+  width: 450px;
+  max-width: 90%;
+  padding: 14px 20px;
   border-radius: 30px;
   border: none;
   outline: none;
@@ -84,6 +87,18 @@ a {
   color: #aaa;
 }
 
+/* =========================
+   HOME / PAGE TITLE
+========================= */
+
+.home {
+  min-height: 100vh;
+}
+
+.page-title {
+  font-size: 30px;
+  padding: 20px 50px;
+}
 
 /* =========================
    MOVIE GRID
@@ -91,11 +106,10 @@ a {
 
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 25px;
-  padding: 30px 50px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+  padding: 20px 50px 50px;
 }
-
 
 /* =========================
    MOVIE CARD
@@ -103,37 +117,48 @@ a {
 
 .movie-card {
   background: #181818;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  transition: 0.3s ease;
   position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 .movie-card:hover {
-  transform: scale(1.05);
+  transform: translateY(-8px) scale(1.03);
 }
 
 .movie-card img {
   width: 100%;
-  height: 270px;
+  height: 300px;
   object-fit: cover;
+  display: block;
 }
 
 .movie-info {
   padding: 15px;
 }
 
-.movie-info h3 {
-  font-size: 17px;
-  margin-bottom: 8px;
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movie-info h3,
+.title-row h3 {
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .movie-info p {
+  margin-top: 10px;
   color: #aaa;
   font-size: 14px;
 }
-
 
 /* =========================
    FAVORITE BUTTON
@@ -143,15 +168,34 @@ a {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: black;
+  background: rgba(0, 0, 0, 0.8);
   border: none;
-  color: red;
-  font-size: 22px;
-  padding: 8px;
+  color: #e50914;
+  font-size: 20px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   cursor: pointer;
+  transition: 0.3s;
 }
 
+.favorite-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Heart Icon */
+
+.heart {
+  color: #777;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.heart:hover {
+  color: #e50914;
+  transform: scale(1.2);
+}
 
 /* =========================
    LOADER
@@ -173,9 +217,7 @@ a {
   animation: rotate 1s linear infinite;
 }
 
-
 @keyframes rotate {
-
   from {
     transform: rotate(0deg);
   }
@@ -183,36 +225,15 @@ a {
   to {
     transform: rotate(360deg);
   }
-
 }
-
 
 /* =========================
-   HOME PAGE
-========================= */
-
-.home {
-  min-height: 100vh;
-}
-
-.page-title {
-  font-size: 30px;
-  padding: 20px 50px;
-}
-
-
-/* =========================
-   FAVORITES PAGE
+   FAVORITES
 ========================= */
 
 .favorites {
   padding-top: 20px;
 }
-
-
-/* =========================
-   EMPTY MESSAGE
-========================= */
 
 .empty {
   text-align: center;
@@ -221,40 +242,41 @@ a {
   color: #aaa;
 }
 
-
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media(max-width:768px){
-
-  .navbar{
-    padding:0 20px;
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
   }
 
-  .logo{
-    font-size:25px;
+  .logo,
+  .navbar h2 {
+    font-size: 25px;
   }
 
-  .nav-links{
-    gap:15px;
+  .nav-links,
+  .navbar div {
+    gap: 12px;
   }
 
-
-  .search-container input{
-    width:85%;
+  .search-container input {
+    width: 90%;
   }
 
-
-  .movie-grid{
-    padding:20px;
-    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
-    gap:15px;
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
   }
 
-
-  .movie-card img{
-    height:220px;
+  .movie-card img {
+    height: 230px;
   }
 
+  .page-title {
+    padding: 20px;
+    font-size: 24px;
+  }
 }
